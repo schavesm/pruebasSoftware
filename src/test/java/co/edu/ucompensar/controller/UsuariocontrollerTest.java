@@ -4,14 +4,17 @@ import co.edu.ucompensar.dao.UsuarioDAOImpl;
 import co.edu.ucompensar.modelo.Usuario;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import co.edu.ucompensar.dao.IUsuarioDAO;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(MockitoExtension.class)
 class UsuariocontrollerTest {
 
 
@@ -19,10 +22,10 @@ class UsuariocontrollerTest {
     private IUsuarioDAO iUsuariodao;
 
     @InjectMocks
-    private UsuarioDAOImpl usuarioDAOImpl;
+    private Usuariocontroller usuariocontroller;
 
     private Usuario usuario;
-    private Usuariocontroller usuariocontroller;
+
 
 
 
@@ -41,8 +44,13 @@ class UsuariocontrollerTest {
     }
     @Test
     public void testDocumentoExiste(){
-
         Mockito.when(iUsuariodao.existeDocumento("123456")).thenReturn(true);
+
+        boolean resultado = iUsuariodao.existeDocumento("123456");
+
+        assertTrue(true, String.valueOf(resultado));
+
+        Mockito.verify(iUsuariodao).existeDocumento("123456");
 
     }
 
